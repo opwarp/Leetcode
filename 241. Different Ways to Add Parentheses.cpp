@@ -1,26 +1,31 @@
 // 241. Different Ways to Add Parentheses.cpp
 class Solution {
-public: 
+public:
     vector<int> diffWaysToCompute(string input) {
-        auto ind = input.find_first_of("+-*", 0);
-        if(ind == string::npos)
-            return {stoi(input)};
-        vector <int> result;
-        while(ind != string::npos){
-            vector <int> left = diffWaysToCompute(input.substr(0, ind)), 
-            right = diffWaysToCompute(input.substr(ind+1, input.size()-1));
-            for (auto i:left){
-                for(auto j:right){
-                     switch(input[ind]){
-                        case '*': result.push_back(i*j);break;
-                        case '+': result.push_back(i+j);break;
-                        case '-': result.push_back(i-j);break;
-                        default : break;
-                     }
+        vector<int> result;
+        int size = input.size();
+        for (int i = 0; i < size; i++) {
+            char cur = input[i];
+            if (cur == '+' || cur == '-' || cur == '*') {
+                // Split input string into two parts and solve them recursively
+                vector<int> result1 = diffWaysToCompute(input.substr(0, i));
+                vector<int> result2 = diffWaysToCompute(input.substr(i+1));
+                for (auto n1 : result1) {
+                    for (auto n2 : result2) {
+                        if (cur == '+')
+                            result.push_back(n1 + n2);
+                        else if (cur == '-')
+                            result.push_back(n1 - n2);
+                        else
+                            result.push_back(n1 * n2);    
+                    }
                 }
             }
-            ind = input.find_first_of("+-*", ind + 1);
         }
+        // if the input string contains only number
+        if (result.empty())
+            // result.push_back(atoi(input.c_str()));
+            result.push_back(stoi(input));
         return result;
     }
 };

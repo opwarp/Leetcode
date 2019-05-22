@@ -11,9 +11,10 @@ class Solution {
 public:
     TreeNode* findLCA(int a, int b, TreeNode* root){
         if(root == NULL){return NULL;}
-        if(root->val < a){return findLCA(a, b, root->right);}
-        if(root->val > b){return findLCA(a, b, root->left);}
-        return root;
+        //
+        if(root->val < a){return findLCA(a, b, root->right);} // val<a<b, a, b on right
+        if(root->val > b){return findLCA(a, b, root->left);} // a<b<val, a,b on left
+        return root; //a<=val<=b, return root
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         int a,b;

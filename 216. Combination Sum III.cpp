@@ -1,29 +1,21 @@
 // 216. Combination Sum III.cpp
 class Solution {
 public:
-    vector<vector<int>> res;
-    void combinationNext(int k, int n, int max, vector<int> lastSet) {
-       for (int i=max; i>=1; i--){
-           int nextN = n - i;
-           if (nextN < k*i-k && nextN > 0){
-               vector<int> curSet = lastSet;
-               if (k > 2){
-                   curSet.push_back(i);
-                   //make it sum of one num and the rest, and recurse the rest
-                   combinationNext(k-1, nextN, i-1, curSet);
-               }
-               //end recursion when the rest are 2 numbers
-               else if (nextN < i){ //nextN < i ensure no duplicate numbers
-                   curSet.push_back(i);
-                   curSet.push_back(nextN);
-                   res.push_back(curSet);
-               }
-           }
-        } 
+    void backtrack(vector<vector<int>> &results, vector<int> &result, int begin, int k, int n){
+        if(k==0&&n==0){
+            results.push_back(result);
+            return;
+        }
+        for(int i=begin; i<=10-k&&k>=0; i++){
+            result.push_back(i);
+            backtrack(results, result, i+1, k-1, n-i); //only collect number begind i, avoid duplicte
+            result.pop_back();
+        }
     }
     vector<vector<int>> combinationSum3(int k, int n) {
-        vector<int> curSet;
-        combinationNext(k, n, 9, curSet);
-        return res;
+        vector<vector<int>> results;
+        vector<int> result;
+        backtrack(results, result, 1, k, n);
+        return results;
     }
 };
