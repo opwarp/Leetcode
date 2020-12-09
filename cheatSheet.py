@@ -76,3 +76,58 @@ s == s[::-1]
 pickle.dump(vecd, open(PATH/f'wiki.{lang}.pkl','wb'))
 # binary operator
 sign = [1,-1][x < 0]
+# format binary padding 0 
+ format(14, '#010b')
+ {}.format(14, '#010b')
+#Fill the string with zeros until it is 10 characters long:
+txt = "50"
+x = txt.zfill(10)
+# sort list
+orgList
+newList = sorted(orgList, key = lambda x: orgList[x])
+# or
+orgList.sort(orgList, key = lambda x: orgList[x])
+# dict to list
+l = list(dict.item())
+# min heap: from min to max, maintain len 
+import heapq
+a = [3,2,1]
+heapq.heapify(a)
+# a become [1,2,3]
+if len(heap) < 3:
+    heapq.heappush(heap, num) # -num if max heap
+else:
+    heapq.heappushpop(heap, num)
+# !!!!!!!! heappop to get ordered item
+#The traditional solution is to store (priority, task) tuples on the heap:
+
+pq = [ ]
+heappush(pq, (10, task1))
+heappush(pq, (5, task2))
+heappush(pq, (15, task3))
+priority, task = heappop(pq)
+
+
+# defaultdict
+from collections import defaultdict
+dint1 = defaultdict(lambda: 0)
+dint2 = defaultdict(int)
+dlist1 = defaultdict(lambda: [])
+dlist2 = defaultdict(list)
+
+for ch in 'abracadabra':
+    dint1[ch] += 1
+    dint2[ch] += 1
+    dlist1[ch].append(1)
+    dlist2[ch].append(1)
+
+# init 2d matrix
+m = [[0]*3]*3 no!!!!!
+t = [ [0]*3 for i in range(3)] #instead
+
+# slice last n number
+nums[-n:]
+# slice first n number
+nums[:n] #nums[0] ~ nums[n-1]
+# slice middle n number
+nums[i:j] #nums[i] ~ nums[j-1]
