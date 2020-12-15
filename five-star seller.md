@@ -31,9 +31,9 @@ Constraints
 The array productRatings contains only non-negative integers.
 
 ```python
-def solution(products, threshold): #O(n * logn)
+def fiveStartReviews(products, threshold): #O(n * logn)
     import heapq
-    
+    threshold = threshold / 100
     n = len(products)
     incProds = []
     sumRate = 0
@@ -47,15 +47,17 @@ def solution(products, threshold): #O(n * logn)
     
     avgRate = sumRate / n
     while True:
+        print(avgRate)
+        print(incProds)
+        if avgRate >= threshold:
+            return res
         inc, incProd = heapq.heappop(incProds)
         avgRate += (-inc) / n # inc in negative for max heap
         res += 1
-        if avgRate >= threshold:
-            return res
         incProdNxt = [ incProd[0]+1, incProd[1]+1 ]
         incNxt = incProdNxt[0] / incProdNxt[1] - incProd[0] / incProd[1] 
         # maintian a product list with all elements get one start
-        heapq.heappush( incProds, (-incNxt, incProd) ) 
+        heapq.heappush( incProds, (-incNxt, incProdNxt) ) 
     
     return -1
 print(solution([[0,4], [89, 678], [4,4], [1,2], [3, 6]], 0.77))
