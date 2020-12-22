@@ -131,3 +131,7 @@ nums[-n:]
 nums[:n] #nums[0] ~ nums[n-1]
 # slice middle n number
 nums[i:j] #nums[i] ~ nums[j-1]
+# bit transfer
+# xor
+# string count char
+bin(x ^ y).count('1')
