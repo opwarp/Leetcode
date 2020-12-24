@@ -135,3 +135,38 @@ nums[i:j] #nums[i] ~ nums[j-1]
 # xor
 # string count char
 bin(x ^ y).count('1')
+# Standard Python dictionaries are unordered. Even if you sorted the (key,value) pairs, you wouldn't be able to store them in a dict in a way that would preserve the ordering.
+
+# The easiest way is to use OrderedDict, which remembers the order in which the elements have been inserted:
+
+In [1]: import collections
+
+In [2]: d = {2:3, 1:89, 4:5, 3:0}
+
+In [3]: od = collections.OrderedDict(sorted(d.items()))
+
+In [4]: od
+Out[4]: OrderedDict([(1, 89), (2, 3), (3, 0), (4, 5)])
+# Never mind the way od is printed out; it'll work as expected:
+
+In [11]: od[1]
+Out[11]: 89
+
+In [12]: od[3]
+Out[12]: 0
+
+In [13]: for k, v in od.iteritems(): print k, v
+   ....: 
+1 89
+2 3
+3 0
+4 5
+Python 3
+# For Python 3 users, one needs to use the .items() instead of .iteritems():
+
+In [13]: for k, v in od.items(): print(k, v)
+   ....: 
+1 89
+2 3
+3 0
+4 5
