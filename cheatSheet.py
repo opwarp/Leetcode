@@ -170,3 +170,6 @@ In [13]: for k, v in od.items(): print(k, v)
 2 3
 3 0
 4 5
+
+# str to characters
+list(str)
